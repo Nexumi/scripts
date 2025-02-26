@@ -34,14 +34,14 @@ if [ -z $BUNDLETOOL_FILE ]; then
 	fi
 fi
 
-KEY_PASSPORT="jpkit"
+KEY_PASS="jpkit"
 if [ ! -f "my-release-key.keystore" ]; then
 	echo "Signing key not found"
-	keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -validity 10000 -dname "CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown" -storepass $KEY_PASSPORT
+	keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -validity 10000 -dname "CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown" -storepass $KEY_PASS
 fi
 
 echo "Building apk..."
-java -jar $BUNDLETOOL_FILE build-apks --bundle=$AAB_FILE --output=app.apks --mode=universal --ks=my-release-key.keystore --ks-pass=pass:$KEY_PASSPORT --ks-key-alias=alias_name
+java -jar $BUNDLETOOL_FILE build-apks --bundle=$AAB_FILE --output=app.apks --mode=universal --ks=my-release-key.keystore --ks-pass=pass:$KEY_PASS --ks-key-alias=alias_name
 if ! unzip -p app.apks universal.apk > app.apk; then
 	echo "Failed to generate apk file"
 	rm app.apk
