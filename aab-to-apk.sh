@@ -37,11 +37,11 @@ fi
 KEY_PASS="dummy"
 if [ ! -f "my-release-key.keystore" ]; then
 	echo "Signing key not found"
-	keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -validity 10000 -dname "CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown" -storepass $KEY_PASS
+	keytool -genkey -v -keystore dummy-key.keystore -alias dummy_name -keyalg RSA -validity 10000 -dname "CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown" -storepass $KEY_PASS
 fi
 
 echo "Building apk..."
-java -jar $BUNDLETOOL_FILE build-apks --bundle=$AAB_FILE --output=app.apks --mode=universal --ks=my-release-key.keystore --ks-pass=pass:$KEY_PASS --ks-key-alias=alias_name
+java -jar $BUNDLETOOL_FILE build-apks --bundle=$AAB_FILE --output=app.apks --mode=universal --ks=dummy-key.keystore --ks-pass=pass:$KEY_PASS --ks-key-alias=dummy_name
 if ! unzip -p app.apks universal.apk > app.apk; then
 	echo "Failed to generate apk file"
 	rm app.apk
