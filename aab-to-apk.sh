@@ -34,7 +34,7 @@ if [ -z $BUNDLETOOL_FILE ]; then
 	fi
 fi
 
-KEY_PASS="jpkit"
+KEY_PASS="dummy"
 if [ ! -f "my-release-key.keystore" ]; then
 	echo "Signing key not found"
 	keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -validity 10000 -dname "CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown" -storepass $KEY_PASS
