@@ -1,0 +1,1 @@
+psql -U postgres -h localhost -p 5432 powercard_db < backupfile.sql
